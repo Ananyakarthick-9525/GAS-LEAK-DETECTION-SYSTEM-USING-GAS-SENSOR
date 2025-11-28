@@ -10,6 +10,7 @@
   Gas sensor (MQ-2)
 	
 ## Circuit Diagram:
+<img width="1036" height="597" alt="image" src="https://github.com/user-attachments/assets/a7bc64cd-e86e-4bbe-b857-f39b2bdf0be6" />
 
  
 
@@ -57,10 +58,53 @@ Step 7: Save Your Work
 •	Save the Circuit: Click "Save" to keep your circuit design and code for future use.
 
 ## Program:
+```
+// C++ code
+//
+
+int red_LED_PIN = 11;
+int green_LED_PIN = 9;
+int buzzer = 6;
+int smoke_detector = A0;
+int safety_lim = 60; 
+
+void setup()
+{
+  pinMode(red_LED_PIN, OUTPUT);
+  pinMode(green_LED_PIN, OUTPUT);
+  pinMode(buzzer, OUTPUT);
+  pinMode(smoke_detector, INPUT);
+  Serial.begin(9600); 
+}
+void loop()
+{
+  int sensor_read = analogRead(smoke_detector); 
+  	
+
+  Serial.print("Smoke Density: ");
+  Serial.println(sensor_read);
+  
+  if (sensor_read > safety_lim)
+ 
+  {
+	analogWrite(red_LED_PIN,255);
+    analogWrite(green_LED_PIN, 0);
+    tone(buzzer,500, 100);  
+  }
+  else
+  {
+ analogWrite(green_LED_PIN, 255);
+    analogWrite(red_LED_PIN,0);
+    noTone(buzzer); 
+  }
+  delay(50);
+}
+```
 
 ## Output:
+<img width="1907" height="806" alt="Screenshot 2025-11-28 112640" src="https://github.com/user-attachments/assets/2b182b91-5dcb-4501-bdff-5f3f2db1b724" />
 
    
 
 ## Result:
-
+Thus, Gas Leak detection using Arduino Uno was successfully implemented using TinkerCad.
